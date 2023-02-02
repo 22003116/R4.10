@@ -1,4 +1,4 @@
-package com.spring.td1
+package edu.spring.td1
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
