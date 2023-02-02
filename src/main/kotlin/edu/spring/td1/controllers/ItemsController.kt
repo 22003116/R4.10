@@ -1,6 +1,6 @@
 package edu.spring.td1.controllers
 
-import edu.spring.td1.models.Item
+import edu.spring.td1.models.Categorie
 import edu.spring.td1.services.UIMessage
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
@@ -8,15 +8,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import org.springframework.web.servlet.view.RedirectView
 
 @Controller
-@SessionAttributes("items")
-class ItemsController {
-    @get:ModelAttribute("items")
-    val items : Set<Item>
+@SessionAttributes("categories")
+class categoriesController {
+    @get:ModelAttribute("categories")
+    val categories : Set<Categorie>
         get(){
-            var elements = HashSet<Item>()
-            elements.add(Item("Foo"))
+            var elements = HashSet<Categorie>()
+            elements.add(Categorie("Amis"))
+            elements.add(Categorie("Famille"))
+            elements.add(Categorie("Professionnels"))
             return elements
-
         }
 
     @RequestMapping("/")
@@ -33,15 +34,15 @@ class ItemsController {
 
     @PostMapping("/addNew")
     fun addNewAction(
-            @ModelAttribute item:Item,
-            @SessionAttribute("items") items:HashSet<Item>,
+            @ModelAttribute Categorie:Categorie,
+            @SessionAttribute("categories") categories:HashSet<Categorie>,
             attrs:RedirectAttributes
     ): RedirectView {
         var msg:UIMessage.Message
-        if(items.add(item)) {
-            msg = UIMessage.success("Ajout", "${item.nom} ajouté aux items.")
+        if(categories.add(Categorie)) {
+            msg = UIMessage.success("Ajout", "${Categorie.label} ajouté aux categories.")
         }else{
-            msg = UIMessage.error("Ajout", "L'item ${item.nom} existe déjà !")
+            msg = UIMessage.error("Ajout", "L'Categorie ${Categorie.label} existe déjà !")
         }
         attrs.addFlashAttribute("msg",msg)
         return RedirectView("/")
@@ -50,10 +51,10 @@ class ItemsController {
     @GetMapping("/delete/{nom}")
     fun deleteAction(
             @PathVariable("nom") nom:String,
-            @SessionAttribute("items") items:HashSet<Item>,
+            @SessionAttribute("categories") categories:HashSet<Categorie>,
             attrs: RedirectAttributes
     ):RedirectView{
-        if(items.remove(Item(nom))){
+        if(categories.remove(Categorie(nom))){
             attrs.addFlashAttribute("msg",
             UIMessage.success("Suppression","$nom supprime."))
         }
