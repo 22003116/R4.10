@@ -1,4 +1,4 @@
-<div class="ui {{type}} icon message">
+<div id="message" class="ui {{type}} icon message">
   <i class="{{icon}} icon"></i>
   <div class="content">
     <div class="header">
@@ -7,3 +7,10 @@
     {{message}}
   </div>
 </div>
+<script>
+  setTimeout(() => {
+    const msg = document.getElementById("message");
+    console.log(msg);
+    msg.style.display = 'none';
+  }, 5000);
+</script>
