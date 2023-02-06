@@ -1,16 +1,18 @@
-<div id="message" class="ui {{type}} icon message">
-  <i class="{{icon}} icon"></i>
-  <div class="content">
-    <div class="header">
-      {{title}}
+{{#msg}}
+    <div id="message" class="ui {{type}} icon message">
+        <i class="{{icon}} icon"></i>
+        <div class="content">
+            <div class="header">
+                {{title}}
+            </div>
+            {{{message}}}
+        </div>
     </div>
-    {{message}}
-  </div>
-</div>
-<script>
-  setTimeout(() => {
-    const msg = document.getElementById("message");
-    console.log(msg);
-    msg.style.display = 'none';
-  }, 5000);
-</script>
+    <script>
+      setTimeout(() => {
+        const msg = document.getElementById("message");
+        console.log(msg);
+        msg.style.display = 'none';
+      }, 2000);
+    </script>
+{{/msg}}
