@@ -16,8 +16,8 @@ public class HelloController {
 	@GetMapping("/")
 	@ResponseBody
 	public String helloAction(HttpSession session) {
-		if(session.getAttribute("user") != null) {
-			return "Bonjour " + session.getAttribute("user");
+		if(session.getAttribute("User") != null) {
+			return "Bonjour " + session.getAttribute("User");
 		}
 		return "Hello world";
 	}
@@ -37,7 +37,7 @@ public class HelloController {
 	@PostMapping("/submit")
 	@ResponseBody
 	public String submitAction(@ModelAttribute("login") String login, HttpSession session) {
-		session.setAttribute("user", login);
+		session.setAttribute("User", login);
 		return "Vous etes connecté sous le nom " + login;
 	}
 }

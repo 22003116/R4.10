@@ -1,9 +1,6 @@
 package edu.spring.td2.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 class Organization {
@@ -18,5 +15,11 @@ class Organization {
     var domain:String?=null
 
     @Column(length = 30)
-    var aliases:String?=null
+    open var aliases:String?=null
+
+    @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    open val Users = mutableSetOf<User>()
+
+    @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    open val Groups = mutableSetOf<Group>()
 }
