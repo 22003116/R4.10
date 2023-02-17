@@ -1,25 +1,34 @@
 package edu.spring.td2.entities
 
 import jakarta.persistence.*
+import kotlin.reflect.jvm.internal.impl.descriptors.deserialization.PlatformDependentDeclarationFilter.All
 
 @Entity
-class Organization {
+open class Organization {
     @Id
-    @GeneratedValue
-    var id:Int?=null
-
-    @Column(nullable = false,unique = true, length = 45)
-    lateinit var name:String
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    open var id:Int?=null
+    @Column(nullable = false, unique = true, length = 45)
+    open lateinit var name:String
 
     @Column(length = 45)
-    var domain:String?=null
+    open var domain:String?=null
 
     @Column(length = 30)
     open var aliases:String?=null
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    open val Users = mutableSetOf<User>()
+    @OrderBy("lastname ASC, firstname ASC")
+    open val users= mutableSetOf<User>()
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    open val Groups = mutableSetOf<Group>()
+    open val groups= mutableSetOf<Group>()
+
+    fun addUser(user: User):Boolean {
+        if(users.add(user)){
+            user.organization=this
+            return true
+        }
+        return false
+    }
 }

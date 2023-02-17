@@ -1,4 +1,4 @@
-package edu.spring.td2.controller
+package edu.spring.td2.controllers
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("/")
 class IndexController {
-
-    @RequestMapping(path = ["", "index"])
+    @RequestMapping(path = ["","index"])
     fun indexAction():String{
         return "index"
     }
